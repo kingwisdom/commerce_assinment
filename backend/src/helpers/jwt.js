@@ -2,7 +2,7 @@ import JWT from "jsonwebtoken";
 import Boom from "boom";
 
 // import redis from "../clients/redis";
-
+const secret = "gGw4nLJyULfr6xWz+r/ALbFqwfN+suID5AafNzUTC0zgprESTc5nTVjdjqMkADRTQba9JAfEGOQtguhCPGxmoBU3kKfsfm8Bpua9LidqveO4qW+QTgLEHb63Q+PUiuWC4d/uj+40hPKFioNq9K69uT6FfBOaLQ1r7NkQfGAN9F73/im15PxDn/iIBoK2eokNGtHdwoqRAJJUSABniXfGH5bRHWt86cCMd7Mq9awSrLnJ/OD08vNtkqIJa7JReLoq9LuU4sM7YmgZ6hVw208SIu6D2mFsIp8bH/LijE7J58JA/g9SLip55BSzhlWGgCO6ObBB"
 const signAccessToken = (data) => {
 	return new Promise((resolve, reject) => {
 		const payload = {
@@ -14,7 +14,7 @@ const signAccessToken = (data) => {
 			issuer: "ecommerce.app",
 		};
 
-		JWT.sign(payload, process.env.JWT_SECRET, options, (err, token) => {
+		JWT.sign(payload, secret, options, (err, token) => {
 			if (err) {
 				console.log(err);
 				reject(Boom.internal());
@@ -31,7 +31,7 @@ const verifyAccessToken = (req, res, next) => {
 		next(Boom.unauthorized());
 	}
 
-	JWT.verify(authorizationToken, process.env.JWT_SECRET, (err, payload) => {
+	JWT.verify(authorizationToken, secret, (err, payload) => {
 		if (err) {
 			return next(
 				Boom.unauthorized(
@@ -55,7 +55,7 @@ const signRefreshToken = (user_id) => {
 			issuer: "ecommerce.app",
 		};
 
-		JWT.sign(payload, process.env.JWT_REFRESH_SECRET, options, (err, token) => {
+		JWT.sign(payload, secret, options, (err, token) => {
 			if (err) {
 				console.log(err);
 				reject(Boom.internal());
@@ -72,7 +72,7 @@ const verifyRefreshToken = async (refresh_token) => {
 	return new Promise(async (resolve, reject) => {
 		JWT.verify(
 			refresh_token,
-			process.env.JWT_REFRESH_SECRET,
+			secret,
 			async (err, payload) => {
 				if (err) {
 					return reject(Boom.unauthorized());

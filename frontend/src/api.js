@@ -1,10 +1,11 @@
 import axios from "axios";
+import { BASE_URL } from "./config";
 
 axios.interceptors.request.use(
   function (config) {
     const { origin } = new URL(config.url);
 
-    const allowedOrigins = [process.env.REACT_APP_BASE_ENDPOINT];
+    const allowedOrigins = [BASE_URL];
     const token = localStorage.getItem("access-token");
 
     if (allowedOrigins.includes(origin)) {
@@ -19,7 +20,7 @@ axios.interceptors.request.use(
 
 export const fetchProductList = async ({ pageParam = 1 }) => {
   const { data } = await axios.get(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/product?page=${pageParam}`
+    `${BASE_URL}/product?page=${pageParam}`
   );
 
   return data;
@@ -27,7 +28,7 @@ export const fetchProductList = async ({ pageParam = 1 }) => {
 
 export const fetchProduct = async (id) => {
   const { data } = await axios.get(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/product/${id}`
+    `${BASE_URL}/product/${id}`
   );
 
   return data;
@@ -35,7 +36,7 @@ export const fetchProduct = async (id) => {
 
 export const postProduct = async (input) => {
   const { data } = await axios.post(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/product/`,
+    `${BASE_URL}/product/`,
     input
   );
 
@@ -44,7 +45,7 @@ export const postProduct = async (input) => {
 
 export const fetcRegister = async (input) => {
   const { data } = await axios.post(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/auth/register`,
+    `${BASE_URL}/auth/register`,
     input
   );
 
@@ -53,7 +54,7 @@ export const fetcRegister = async (input) => {
 
 export const fetchLogin = async (input) => {
   const { data } = await axios.post(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/auth/login`,
+    `${BASE_URL}/auth/login`,
     input
   );
 
@@ -62,14 +63,14 @@ export const fetchLogin = async (input) => {
 
 export const fetchMe = async () => {
   const { data } = await axios.get(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/auth/me`
+    `${BASE_URL}/auth/me`
   );
   return data;
 };
 
 export const fetchLogout = async () => {
   const { data } = await axios.post(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/auth/logout`,
+    `${BASE_URL}/auth/logout`,
     {
       refresh_token: localStorage.getItem("refresh-token"),
     }
@@ -79,7 +80,7 @@ export const fetchLogout = async () => {
 
 export const postOrder = async (input) => {
   const { data } = await axios.post(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/order`,
+    `${BASE_URL}/order`,
     input
   );
   return data;
@@ -87,14 +88,14 @@ export const postOrder = async (input) => {
 
 export const fetchOrders = async () => {
   const { data } = await axios.get(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/order`
+    `${BASE_URL}/order`
   );
   return data;
 };
 
 export const deleteProduct = async (product_id) => {
   const { data } = await axios.delete(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/product/${product_id}`
+    `${BASE_URL}/product/${product_id}`
   );
 
   return data;
@@ -102,7 +103,7 @@ export const deleteProduct = async (product_id) => {
 
 export const updateProduct = async (input, product_id) => {
   const { data } = await axios.put(
-    `${process.env.REACT_APP_BASE_ENDPOINT}/product/${product_id}`,
+    `${BASE_URL}/product/${product_id}`,
     input
   );
 
