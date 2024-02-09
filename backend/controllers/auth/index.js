@@ -1,15 +1,15 @@
 import Boom from "boom";
-import User from "../../models/user";
+import User from "../../models/user.js";
 
 // helpers
 import {
 	signAccessToken,
 	signRefreshToken,
 	verifyRefreshToken,
-} from "../../helpers/jwt";
+} from "../../helpers/jwt.js";
 
 // validations
-import ValidationSchema from "./validations";
+import ValidationSchema from "./validations.js";
 // import redis from "../../clients/redis";
 
 const Register = async (req, res, next) => {

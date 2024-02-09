@@ -1,7 +1,7 @@
-import User from '../../models/user';
-import Order from '../../models/order';
+import User from '../../models/user.js';
+import Order from '../../models/order.js';
 import Boom from 'boom';
-import OrderSchema from './validations';
+import OrderSchema from './validations.js';
 
 const Create = async (req, res, next) => {
   const input = req.body;

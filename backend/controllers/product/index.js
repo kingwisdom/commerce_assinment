@@ -1,6 +1,6 @@
-import Product from "../../models/product";
+import Product from "../../models/product.js";
 import Boom from "boom";
-import ProductSchema from "./validations";
+import ProductSchema from "./validations.js";
 
 const Create = async (req, res, next) => {
   const input = req.body;
